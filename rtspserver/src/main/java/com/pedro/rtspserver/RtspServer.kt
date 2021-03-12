@@ -184,13 +184,11 @@ class RtspServer(context: Context, private val connectCheckerRtsp: ConnectChecke
             rtspSender.setSocketsInfo(commandsManager.protocol, commandsManager.videoClientPorts,
               commandsManager.audioClientPorts)
             rtspSender.setVideoInfo(commandsManager.sps!!, commandsManager.pps!!, commandsManager.vps)
-            if(commandsManager.audioPorts.size > 0)
-              rtspSender.setAudioInfo(sampleRate)
+            rtspSender.setAudioInfo(sampleRate)
             rtspSender.setDataStream(socket.getOutputStream(), commandsManager.clientIp!!)
             if (commandsManager.protocol == Protocol.UDP) {
               rtspSender.setVideoPorts(commandsManager.videoPorts[0], commandsManager.videoPorts[1])
-              if(commandsManager.audioPorts.size > 0)
-                rtspSender.setAudioPorts(commandsManager.audioPorts[0], commandsManager.audioPorts[1])
+              rtspSender.setAudioPorts(commandsManager.audioPorts[0], commandsManager.audioPorts[1])
             }
             rtspSender.start()
             canSend = true
